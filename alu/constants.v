@@ -14,5 +14,6 @@
 `define ALU_SRA     4'b1000
 `define ALU_OR      4'b1010
 `define ALU_AND     4'b1011
+`define ALU_SEQ     4'b1111
 
 `endif        
