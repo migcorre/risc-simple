@@ -24,7 +24,7 @@ async def write_and_read_memory(dut, address, data):
     #f"Error en la dirección {address}. Esperado: {data}, Leído: {dut.data_out_sync.value}"
 
 @cocotb.test()
-async def memory_test(dut):
+async def registers_test(dut):
     dut._log.info("--- START TEST ---------------------------------")
     clock = Clock(dut.clk, 1, units="ns")
     cocotb.start_soon(clock.start())

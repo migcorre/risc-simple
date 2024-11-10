@@ -1,4 +1,4 @@
-module memory_reg(
+module memory_regs(
     input wire [4:0] address, // Dirección de memoria de 5 bits
     input wire write_enable, // Habilitar escritura asincrona
     input wire [31:0] data_in, // Datos de entrada para escritura asincrona
@@ -20,8 +20,8 @@ module memory_reg(
 
   // Dump waves
   initial begin
-    $dumpfile("memory_reg.vcd");
-    $dumpvars(0, memory_reg);
+    $dumpfile("memory_regs.vcd");
+    $dumpvars(0, memory_regs);
     #1;
   end
 
