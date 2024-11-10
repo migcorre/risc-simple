@@ -1,4 +1,4 @@
-We wbuild an ALU to handle Instruction Type R:
+We build an ALU to handle Instruction Type R:
 
 ![image](https://github.com/user-attachments/assets/7f05de93-45ab-4183-aac7-69f416766985)
 
@@ -26,4 +26,11 @@ We here combine SIGNAL_BIT + FUNC3 from standard
 
 `endif                        
 ```
+
+We created a cocotb test for basic addition and subtration operation: \
+(you can see in the alu_test.py for more detail) 
+
+![image](https://github.com/user-attachments/assets/a7f80950-243a-4838-81f5-d041a6c82ed9)
+
+
 
