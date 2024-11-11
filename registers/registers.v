@@ -1,29 +1,35 @@
-module memory_regs(
-    input wire [4:0] address, // Dirección de memoria de 5 bits
-    input wire write_enable, // Habilitar escritura asincrona
-    input wire [31:0] data_in, // Datos de entrada para escritura asincrona
-    input wire clk, // Señal de reloj
-    output wire [31:0] data_out // Salida de lectura sincrona
+
+module registers (
+    input  clock,
+    input  we,
+    input  [4:0] reg_to_write_addr,
+    input  [4:0] reg_stored_1_addr,
+    input  [4:0] reg_stored_2_addr,
+    input  [31:0] reg_to_write_data,
+    output [31:0] reg_stored_1_data,
+    output [31:0] reg_stored_2_data
 );
 
-  reg [31:0] memory [0:31]; // Banco de memoria de 32 direcciones de 32 bits cada una
-  
-  // Escritura asincrona
-  assign data_out = memory[address];
-  
-  // escritura sincrona
-  always @(posedge clk) begin
-      if (write_enable) begin
-        memory[address] <= data_in;
-      end
-  end
+    // 32 regs with  32bit width each one
+    logic [31:0] regs [0:31];
+   
+    // Read ports for reg_stored_1 and reg_stored_2
+    assign reg_stored_1_data = regs[reg_stored_1_addr];
+    assign reg_stored_2_data = regs[reg_stored_2_addr];
+
+    // Register x0 is always 0
+    initial regs[0] = 32'b0;
+
+    // Write port for reg_to_write
+    always @(posedge clock)
+        if (we && (reg_to_write_addr != 5'b0)) 
+		regs[reg_to_write_addr] <= reg_to_write_data;
 
   // Dump waves
   initial begin
-    $dumpfile("memory_regs.vcd");
-    $dumpvars(0, memory_regs);
+    $dumpfile("registers.vcd");
+    $dumpvars(0, registers);
     #1;
   end
 
 endmodule
-
